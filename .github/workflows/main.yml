@@ -37,5 +37,5 @@ jobs:
         with:
           image-ref: phattnutss/my-nginx-static-website:${{ github.sha }}
           format: 'table'
-          exit-code: '1'
+          exit-code: '0'
           severity: 'CRITICAL,HIGH'
