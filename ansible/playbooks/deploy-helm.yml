@@ -9,6 +9,11 @@
         dest: /tmp/
         remote_src: yes
 
+    - name: install python3
+      yum:
+        name: python3
+        state: present
+
     - name: move helm to right dest
       copy:
         src: /tmp/linux-amd64/helm
@@ -22,10 +27,8 @@
         dest: /home/helm
       tags: copy-helm
 
-    - name: install my chart
-      shell: |
-        helm upgrade --install myapp /home/helm/my-nginx-chart \
-        --kubeconfig=/etc/rancher/k3s/k3s.yaml \
-        --namespace myapp \
-        --create-namespace
+    - name: install my chart with python
+      script: /home/devops-cloud-project/python/helm_script.py
+      args:
+        executable: python3
       tags: install-helm
